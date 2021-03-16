@@ -1,0 +1,537 @@
+{% load static %}
+<style>
+.search_place{
+  height: 40px;
+  width: 90%;
+  max-width: 85%;
+  padding: 3px;
+}
+.search_button{
+  height: 40px;
+  color: white;
+  background-color: red;
+  border: none;
+  border-style: none;
+  margin-left: -5px;
+  width: 50px;
+}
+.premium{
+  background-color: #ededed;
+  padding: 10px;
+}
+.carousel-cell {
+  width: 65%;
+  height: 400px;
+  margin-right: 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.carousel-cell-slide {
+  width: 23%;
+  height: 300px;
+  margin-right: 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.leftside, .rightside {
+  height: 35vh;
+  width: 100%;
+}
+.other_field{
+  display: none;
+}
+@media screen and (min-width: 768px) {
+  .leftside, .rightside {
+  height: 100vh;
+  
+}
+.other_field{
+  display: block;
+}
+}
+</style>
+
+{% block content %}
+<section class="content"> 
+    <div class="container-fluid">
+      
+      <!-- Main Box for searching -->
+      <div class="row">
+        <div class="col-12 col-md-6 p-0" >
+          <div style="background-image: url('./static/dist/img/cover.jpg'); height: 300px; width: 100%; background-size: 100%, 100%;">
+            <h3 class="text-center font-weight-bolder text-white">Dale Dai</h3>
+            <p class="text-center text-white">Best Property Selling Website</p>
+            <form  action="search" method ="GET" class="text-center">
+            <input type="text"  class="search_place" placeholder="House, land, location, things you want" name="searchlocation" required>
+            {% csrf_token %}
+                <button type="submit" class="search_button"><i class="fa fa-search"></i></button>
+            </form>
+            <br>
+            <p class="text-center text-white bg-dark">
+              Dale Dai established in 2020 is one of the best Property selling website
+            </p>
+            <div class="text-center text-white bg-dark">
+              <h6> <i class="fa fa-phone p-2 text-black-50" style="background-color: white; border-radius: 50%; " ></i> Call Us:  9861397178</h6>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 bg-dark">
+          <h4 class="text-center">
+              Choose Specific Ads For You
+          </h4>
+          <form action="searchads" method="GET" class="text-center">
+            <div class="text-center">
+              <div class="btn-group btn-group-toggle p-3 ml-20" data-toggle="buttons">
+                <label class="btn bg-olive active">
+                  <input type="radio" name="options" id="option1" autocomplete="off" checked="" value="house"> House
+                </label>
+                <label class="btn bg-olive">
+                  <input type="radio" name="options" id="option2" autocomplete="off" value="land"> Land
+                </label>
+                <label class="btn bg-olive">
+                  <input type="radio" name="options" id="option3" autocomplete="off" value="business"> Business
+                </label>
+                <label class="btn bg-olive">
+                  <input type="radio" name="options" id="option3" autocomplete="off" value="rent"> Rent
+                </label>
+              </div>
+            </div>
+            <select name="pricerange" placeholder="Price Range" style="height: 40px; width: 80%;" class="text-center">
+              <option value="99999"> Below 1 Lakh </option>
+              <option value="999999">Below 10 Lakh </option>
+              <option value="4999999">Below 50 Lakh </option>
+              <option value="9999999">Below 1 Core </option>
+              <option value="29999999">Below 3 Core </option>
+              <option value="49999999">Above 3  Core </option>
+            </select> <br><br>
+            <select name="location" placeholder="Location" style="height: 40px; width: 80%;" class="text-center">            
+              <option value="Kathmandu"> Kathmandu</option>
+              <option value="Bhaktapur">Bhaktapur </option>
+              <option value="Lalitpur">Lalitpur</option>
+              <option value="Makwanpur">Makwanpur</option>
+              <option value="Chitwan"> Chitwan</option>
+              <option value="Dhading">Dhading </option>
+              <option value="Dhankuta">Dhankuta</option>
+              <option value="Gorkha">Gorkha</option>
+              <option value="Jhapa"> Jhapa</option>
+              <option value="Kaski">Kaski </option>
+              <option value="Kavrepalanchok">Kavrepalanchok</option>
+              <option value="Solukhumbu">Solukhumbu</option>
+              <option value="Surkhet">Surkhet </option>
+              <option value="Taplejung">Taplejung</option>
+              <option value="Other">Other</option>
+            </select> <br><br>
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger btn-flat col-8">
+              Search
+            </button>
+            <br>
+          </form>
+         <br>
+        </div>
+      </div>
+      <br>
+      <div class="callout callout-info bg-dark">
+        <h5><i class="fas fa-info"></i> Dale Dai</h5>
+        You can boost your Ads for premium and features list selling your property quicker than you thought. 
+      </div>
+
+
+      <!-- Mail Slider -->
+    {% if premium %}
+    <div class="premium">
+      <!-- showing premium list -->
+    <h4 class = "text-center"><b> Premium Property for Sale | </b> <a href="{%url 'premium_list'%}" class="btn btn-danger btn-sm"> View All Premium List</a></h4> 
+      <div class="carousel" data-flickity='{ "wrapAround": true, "autoPlay": true }'>
+        {% for ads in premium  %}
+        <div class="carousel-cell">
+            <div class="row no-gutters">
+              <div class="col-md-8 no-gutters">
+                <div class="leftside">
+                  <img src="{{ads.images.url}}" alt="" srcset="" style="height: 100%; width: 100%;">
+                </div>
+              </div>
+              <div class="col-md-4 bg-white no-gutters pl-3">
+                <div class="rightside">
+                  <h6 class="text-capitalize">
+                    <b>
+                      {{ads.title}}
+                    </b>
+                    {% if ads.house %}
+                    <span class="badge badge-primary">House</span>
+                    {% endif %}
+                    {% if ads.land %}
+                    <span class="badge badge-primary">Land</span>
+                    {% endif %}
+                    {% if ads.business %}
+                    <span class="badge badge-primary">Business</span>
+                    {% endif %}
+                    {% if ads.rent %}
+                    <span class="badge badge-primary">Rent</span>
+                    {% endif %}
+                    </h6>
+                    <span class="text-capitalize" style="display: block; font-size: 13px;">{{ads.district}}-{{ads.woda}}-{{ads.location}}</span>
+                    <h6 class="p-0">Rs. <b>{{ads.price}}</b> </h6>
+                    {% if ads.house %}
+                    <!-- <span class="bg-danger p-1">Face Toward: {{ads.house.face_toward}}</span> <br> -->
+                    <span style="display: block; font-size: 10px;" class="text-capitalize">Land: {{ads.house.landsize}} </span>
+                    <span style="display: block; font-size: 10px;" class="text-capitalize">Road: {{ads.house.road_size}}</span>
+                    <span style="display: block; font-size: 10px;" class="text-capitalize">Floor: {{ads.house.floor}}   </span>
+                    {% endif %}
+                    
+                    {% if ads.land %}
+                    <span style="display: block; font-size: 10px;" class="text-capitalize">Land: {{ads.land.landsize}} </span>
+                    <span style="display: block; font-size: 10px;" class="text-capitalize">Road: {{ads.land.road_size}}</span>
+                    <span style="display: block; font-size: 10px;" class="text-capitalize">Plotting: {{ads.land.plotting}}   </span>
+                    <span style="display: block; font-size: 10px;" class="text-capitalize">Elecrticity Line: {{ads.land.electrivityline}}   </span>
+      
+                    {% endif %}
+                      
+                    {% if ads.business %}
+                    <br>
+                    <!-- <h4 class="bg-blue p-1">Business Type: {{ads.business.businesstype}}</h4> -->
+                    {% endif %}
+                  
+                    {% if ads.rent %}
+                    <span style="display: block; font-size: 13px;" class="text-capitalize">Total Room: {{ads.rent.rentroom}}   </span>
+                    <div>
+                      <span class="pr-3" style="font-size: 12px;">Garage: <b>{{ads.rent.garage}}</b> </span>
+                      <span class="pr-3" style="font-size: 12px;">Internet: <b>{{ads.rent.internet}}</b></span>
+                      <span class="pr-3" style="font-size: 12px;">TV channel: <b>{{ads.rent.tvchannel}}</b></span>
+                    </div>
+                    {%endif%}
+                    <small class="text-capitalize" style="font-size: 10px;">Price in word: {{ads.price_in_words}}</small> <span class="badge badge-primary">{{ads.selling_in}}</span> <br>
+                    <div class="other_field">
+                      {% if ads.house %}
+                      <div class="btn-group btn-group-toggle p-2" data-toggle="buttons">
+                        <label class="btn btn-default text-center" >
+                          <input type="radio" name="color_option" id="color_option1" autocomplete="off">
+                          <span class="text-md"><i class="fa fa-bed" style="font-size: 11px;">  </i></span>
+                          <br>
+                          {{ads.house.bedroom}} <small  style="font-size: 11px;">bedroom</small>
+                        </label>
+                        <label class="btn btn-default text-center">
+                          <input type="radio" name="color_option" id="color_option1" autocomplete="off">
+                          <span class="text-md"><i class="fa fa-bath" style="font-size: 11px;">  </i></span>
+                          <br>
+                          {{ads.house.bathroom}} <small  style="font-size: 11px;">bathroom</small>
+                        </label>
+                        <label class="btn btn-default text-center">
+                          <input type="radio" name="color_option" id="color_option1" autocomplete="off">
+                          <span class="text-md"><i class="fa fa-cheese" style="font-size: 11px;"></i></span>
+                          <br>
+                          {{ads.house.kitchen}} <small  style="font-size: 11px;">kitchen</small>
+                        </label>
+                        
+                      </div>
+                      {% endif %}
+                     
+                      {% if ads.rent %}
+                      <div class="btn-group btn-group-toggle p-2" data-toggle="buttons">
+                        <label class="btn btn-default text-center">
+                          <input type="radio" name="color_option" id="color_option1" autocomplete="off">
+                          <span class="text-md"><i class="fa fa-bed" style="font-size: 11px;">  </i></span>
+                          <br>
+                          {{ads.rent.rentroom}} <small  style="font-size: 11px;">Total room</small>
+                        </label>
+                        <label class="btn btn-default text-center">
+                          <input type="radio" name="color_option" id="color_option1" autocomplete="off">
+                          <span class="text-md"><i class="fa fa-bath" style="font-size:11px;">  </i></span>
+                          <br>
+                          {{ads.rent.bathroom}} <small  style="font-size: 11px;">bathroom</small>
+                        </label>
+                      </div>
+                      {%endif%}
+                    </div>
+                  </div>
+              </div>
+            </div>
+        </div> 
+        {%endfor%}
+      </div>
+    
+    </div>
+    {%endif%}
+<br><br>
+{% if  feature %}
+<!-- Features -->
+<h4 class="text-center"><b> Feature Property for Sale | </b> <a href="{%url 'feature_list'%}" class="btn btn-danger btn-sm"> View All Feature List</a></h4>
+<div class="in-use-carousel" data-flickity="{ &quot;lazyLoad&quot;: 1, &quot;wrapAround&quot;: true, &quot;groupCells&quot;: true }">
+  {% for ads in feature  %}
+  <a class="in-use-carousel__item" href="{%url 'details_page' ads.id%}">
+    <div class="in-use-carousel__item__image" style="padding: 10px; width: 400px; ">
+      <div class="image_feature">
+        <img src= "{%if ads.images%}
+        {{ads.images.url}}
+        {%else%}
+        {%static 'dist/img/aa.png'%}
+        {%endif%}
+        " alt="" srcset="" style="height: 300px; width: 100%;" >
+      </div>
+      <div class="details_sections pl-2" style="border: solid #d6d6d6 1px;">
+        <h5 style="color: black; font-weight: bold;">
+          {{ads.title}}
+        </h5>
+        <span style="color: black; display: block; font-weight: bold;" >
+          Rs. {{ads.price}}
+        </span>
+        <small style="color: black; display: block;">
+          <i class="fa fa-location-arrow">
+
+          </i>
+          {{ads.location}}
+        </small>
+      </div>
+    </div>
+    <!-- <img class="in-use-carousel__item__image" data-flickity-lazyload="https://i.imgur.com/lxdGu60.jpg" alt="Riot Games" style="padding: 10px;"> -->
+  </a>
+  {% endfor %}
+
+  
+</div>
+<!-- end features -->
+{% endif %}     
+        {% if  house%}
+                  <!-- showing House -->
+        <div class="card-body">
+          <h4 class = "text-center"><b>House for Sale | </b> <a href="{%url 'house_page'%}" class="btn btn-danger btn-sm"> View Houses</a></h4> 
+          <div class="row">    
+          
+            {% for ads in house  %}
+           
+              <div class="col-sm-4 p-2" >
+                <a href="{%url 'details_page' ads.objectname.id %}" style="color:black; cursor: pointer; text-decoration: none;">
+                <div class="position-relative p-0 bg-#d6d6d6 box-details" style="height: 250px; border: 1px solid #d6d6d6; box-shadow: 1px 2px #d6d6d6;">
+                  <div class="ribbon-wrapper">
+                    <div class="ribbon bg-primary" style="font-size:9px;">
+                      {{ads.objectname.selling_in}}
+                    </div>
+                  </div>
+                  <div class="ads-details" style="width:100%; height: 100%; display: inline-flex;">
+                    <div class="ads-text p-1" style="width:40%; height:100%;">
+
+                      <small >ID: {{ads.objectname.id}}</small> 
+                      <span class="badge badge-primary">House<small style="font-size: 12px;"> <br>By: {{ads.objectname.created_by.first_name}}</small></span> 
+                    
+                      <span style="display: block; font-size: 15px; font-weight: bold;">  Rs. {{ads.objectname.price}} 
+                        {% if ads.objectname.premium == 'Yes' %}
+                 
+                          <i class="fa fa-star" style="color:gold; font-size: 10px;"></i>
+                          <i class="fa fa-star" style="color:gold; font-size: 10px;"></i>
+                          <i class="fa fa-star" style="color:gold; font-size: 10px;"></i>
+
+                        {% endif %}
+                        {% if ads.objectname.feature == 'Yes' %}
+                 
+                        <i class="fa fa-star" style="color:gold; font-size: 10px;"></i>
+                        <i class="fa fa-star" style="color:gold; font-size: 10px;"></i>
+                        {% endif %}
+                      </span>
+
+                      <span style="display: block; font-size: 10px;" class="text-capitalize"> Price: {{ads.objectname.price_in_words}} </span>
+                      <span style="display: block; font-size: 17px; font-weight: bold;" class="text-capitalize">{{ads.objectname.location}} </span>
+                      <span style="display: block; font-size: 13px;" class="text-capitalize">Land: {{ads.landsize}} </span>
+                      <span style="display: block; font-size: 13px;" class="text-capitalize">Road: {{ads.road_size}} </span>
+                      <small class="bg-red p-1">Face Toward: {{ads.face_toward}}</small> <br>
+                      <i class="fa fa-bath" style="font-size: 13px;"> {{ads.bathroom}} </i>
+                      <i class="fa fa-bed" style="font-size: 13px;"> {{ads.bedroom}} </i>
+                      <i class="fa fa-cheese" style="font-size: 13px;"> {{ads.kitchen}} </i>
+                    </div>
+                    <div class="ads-image" style="width: 60%; height: 100%; background-color: blue;">
+                         <img src=" {%if ads.objectname.images%}
+                         {{ads.objectname.images.url}}
+                         {%else%}
+                         {%static 'dist/img/aa.png'%}
+                         {%endif%}
+                         " alt="" srcset="" style="height: 100%; width: 100%;">
+                    </div>
+                  </div>
+                </div>
+              </a>
+              </div>
+            {% endfor %}
+          </div>
+      </div>
+        {% endif %}
+                  
+
+
+{% if land %}
+          <!-- showing Lands -->
+          <div class="card-body">
+            <h4 class = "text-center"><b>Land for Sale | </b> <a href="{%url 'land_page'%}" class="btn btn-danger btn-sm"> View Lands</a></h4>
+              <div class="row">      
+                {% for ads in land  %}
+                <div class="col-sm-4 p-2" id="ads-{{ads.id}}">
+                  <a href="{%url 'details_page' ads.objectname.id%}" style="color:black; cursor: pointer; text-decoration: none;">
+                  <div class="position-relative p-0 bg-#d6d6d6 box-details" style="height: 220px; border: 1px solid #d6d6d6; box-shadow: 1px 2px #d6d6d6;">
+                    <div class="ribbon-wrapper">
+                      <div class="ribbon bg-primary" style="font-size:9px;">
+                        {{ads.objectname.selling_in}}
+                      </div>
+                    </div>
+                    <div class="ads-details" style="width:100%; height: 100%; display: inline-flex;">
+                      <div class="ads-text p-1" style="width:40%; height:100%;">
+                        <small >ID: {{ads.objectname.id}}</small> 
+                        <span class="badge badge-primary">land <br><small style="font-size: 12px;">By: {{ads.objectname.created_by.first_name}}</small></span>
+                        <span style="display: block; font-size: 15px; font-weight: bold;"> Rs. {{ads.objectname.price}} 
+                          {% if ads.objectname.premium == 'Yes' %}
+                     
+                          <i class="fa fa-star" style="color:gold; font-size: 10px;"></i>
+                          <i class="fa fa-star" style="color:gold; font-size: 10px;"></i>
+                          <i class="fa fa-star" style="color:gold; font-size: 10px;"></i>
+  
+                        {% endif %}
+                        {% if ads.objectname.feature == 'Yes' %}
+                 
+                        <i class="fa fa-star" style="color:gold; font-size: 10px;"></i>
+                        <i class="fa fa-star" style="color:gold; font-size: 10px;"></i>
+                        {% endif %}
+                        </span>
+                        <span style="display: block; font-size: 10px;" class="text-capitalize">Price: {{ads.objectname.price_in_words}} </span>
+                        <span style="display: block; font-size: 17px; font-weight: bold;" class="text-capitalize">{{ads.objectname.location}} </span>
+                        <span style="display: block; font-size: 13px;" class="text-capitalize">Land: {{ads.landsize}} </span>
+                        <span style="display: block; font-size: 13px;" class="text-capitalize">Road: {{ads.road_size}} </span>
+                        <span style="display: block; font-size: 13px;" class="text-capitalize">Plotting: {{ads.plotting}} </span>
+                        <span style="display: block; font-size: 13px;" class="text-capitalize">Meter Line: {{ads.electrivityline}} </span>
+                      </div>
+                      <div class="ads-image" style="width: 60%; height: 100%; background-color: blue;">
+                           <img src=" {%if ads.objectname.images%}
+                           {{ads.objectname.images.url}}
+                           {%else%}
+                           {%static 'dist/img/aa.png'%}
+                           {%endif%}
+                           " alt="" srcset="" style="height: 100%; width: 100%;">
+                      </div>
+                    </div>
+                  </div>
+                  </a>
+                </div>
+                {% endfor %}
+              </div>
+          </div>
+  
+{% endif %}
+  
+
+
+{% if rent %}
+          <!-- showing rents -->
+
+          <div class="card-body">
+            <h4 class = "text-center"><b>Rent for Sell | </b> <a href="{%url 'rent_page'%}" class="btn btn-danger btn-sm"> View Rents</a></h4>
+              <div class="row">      
+                {% for ads in rent  %}
+                <div class="col-sm-4 p-2" id="ads-{{ads.id}}">
+                  <a href="{%url 'details_page' ads.objectname.id%}" style="color:black; cursor: pointer; text-decoration: none;">
+                  <div class="position-relative p-0 bg-#d6d6d6 box-details" style="height: 220px; border: 1px solid #d6d6d6; box-shadow: 1px 2px #d6d6d6;">
+                    <div class="ribbon-wrapper">
+                      <div class="ribbon bg-primary" style="font-size:9px;">
+                        {{ads.objectname.selling_in}}
+                      </div>
+                    </div>
+                    <div class="ads-details" style="width:100%; height: 100%; display: inline-flex;">
+                      <div class="ads-text p-1" style="width:40%; height:100%;">
+                        <small >ID: {{ads.objectname.id}}</small> 
+                        <span class="badge badge-primary">Rent <br><small style="font-size: 12px;">By: {{ads.objectname.created_by.first_name}}</small></span>
+                        <span style="display: block; font-size: 15px; font-weight: bold;"> Rs. {{ads.objectname.price}} 
+                          {% if ads.objectname.premium == 'Yes' %}
+                     
+                          <i class="fa fa-star" style="color:gold; font-size: 10px;"></i>
+                          <i class="fa fa-star" style="color:gold; font-size: 10px;"></i>
+                          <i class="fa fa-star" style="color:gold; font-size: 10px;"></i>
+  
+                        {% endif %}
+                        {% if ads.objectname.feature == 'Yes' %}
+                 
+                        <i class="fa fa-star" style="color:gold; font-size: 10px;"></i>
+                        <i class="fa fa-star" style="color:gold; font-size: 10px;"></i>
+                        {% endif %}
+                        </span>
+                        <span style="display: block; font-size: 10px;" class="text-capitalize">Price: {{ads.objectname.price_in_words}} </span>
+                        <span style="display: block; font-size: 17px; font-weight: bold;" class="text-capitalize">{{ads.objectname.location}} </span>
+                        <span style="display: block; font-size: 12px;" class="text-capitalize">Garage Space: {{ads.garage}} </span>
+                        <span style="display: block; font-size: 12px;" class="text-capitalize">TV Channel: {{ads.tvchannel}} </span>
+                        <span style="display: block; font-size: 12px;" class="text-capitalize">Internet: {{ads.internet}} </span>
+                        <i class="fa fa-bath" style="font-size: 12px;"> {{ads.bathroom}} </i>
+                        <i class="fa fa-bed" style="font-size: 12px;"> {{ads.rentroom}} </i>
+                      </div>
+                      <div class="ads-image" style="width: 60%; height: 100%; background-color: blue;">
+                           <img src=" {%if ads.objectname.images%}
+                           {{ads.objectname.images.url}}
+                           {%else%}
+                           {%static 'dist/img/aa.png'%}
+                           {%endif%}
+                           " alt="" srcset="" style="height: 100%; width: 100%;">
+                      </div>
+                    </div>
+                  </div>
+                  </a>
+                </div>
+                {% endfor %}
+              </div>
+          </div>
+{% endif %}
+  
+
+
+
+{% if business %}
+    
+      <div class="card-body">
+        <h4 class = "text-center"><b>Business for Sale | </b> <a href="{%url 'rent_page'%}" class="btn btn-danger btn-sm"> View Rents</a></h4>
+          <div class="row">      
+            {% for ads in business  %}
+            <div class="col-sm-4 p-2" id="ads-{{ads.id}}">
+              <a href="{%url 'details_page' ads.objectname.id%}" style="color:black; cursor: pointer; text-decoration: none;">
+              <div class="position-relative p-0 bg-#d6d6d6 box-details" style="height: 220px; border: 1px solid #d6d6d6; box-shadow: 1px 2px #d6d6d6;">
+                <div class="ribbon-wrapper">
+                  <div class="ribbon bg-primary" style="font-size:9px;">
+                    {{ads.objectname.selling_in}}
+                  </div>
+                </div>
+                <div class="ads-details" style="width:100%; height: 100%; display: inline-flex;">
+                  <div class="ads-text p-1" style="width:40%; height:100%;">
+                    <small >ID: {{ads.objectname.id}}</small> 
+                    <span class="badge badge-primary">Rent <br><small style="font-size: 12px;">By: {{ads.objectname.created_by.first_name}}</small></span>
+                    <span style="display: block; font-size: 15px; font-weight: bold;"> Rs. {{ads.objectname.price}} 
+                      {% if ads.objectname.premium == 'Yes' %}
+                
+                      <i class="fa fa-star" style="color:gold; font-size: 10px;"></i>
+                      <i class="fa fa-star" style="color:gold; font-size: 10px;"></i>
+                      <i class="fa fa-star" style="color:gold; font-size: 10px;"></i>
+
+                    {% endif %}
+                    {% if ads.objectname.feature == 'Yes' %}
+            
+                    <i class="fa fa-star" style="color:gold; font-size: 10px;"></i>
+                    <i class="fa fa-star" style="color:gold; font-size: 10px;"></i>
+                    {% endif %}
+                    </span>
+                    <span style="display: block; font-size: 10px;" class="text-capitalize">Price: {{ads.objectname.price_in_words}} </span>
+                    <span style="display: block; font-size: 17px; font-weight: bold;" class="text-capitalize">{{ads.objectname.location}} </span>
+                    <div class="btn btn-warning bg-accent-blue btn-xs btn-block">
+                      {{ads.businesstype}}
+                    </div>
+                  </div>
+                  <div class="ads-image" style="width: 60%; height: 100%; background-color: blue;">
+                      <img src=" {%if ads.objectname.images%}
+                      {{ads.objectname.images.url}}
+                      {%else%}
+                      {%static 'dist/img/aa.png'%}
+                      {%endif%}
+                      " alt="" srcset="" style="height: 100%; width: 100%;">
+                  </div>
+                </div>
+              </div>
+              </a>
+            </div>
+            {% endfor %}
+          </div>
+      </div>
+{%endif%}
+</div>
+</section>
+
+
+{% endblock content %}

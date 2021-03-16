@@ -1,0 +1,62 @@
+{% extends "admin_templates/base_template.html" %}
+{% load static %}
+{% block title %}
+  Manage your Ads
+{% endblock title %}
+{% block content %}
+
+
+<div class="card">
+  <div class="card-header border-transparent">
+    <h3 class="card-title">Latest Request</h3>
+  </div>
+  <!-- /.card-header -->
+  <div class="card-body p-0" style="display: block;">
+    <div class="table-responsive">
+      <table class="table m-0">
+        <thead>
+        <tr>
+          <th>For Ads ID</th>
+          <th>By</th>
+          <th>Requester Number</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for ad in reqads  %}
+        
+        {% if ad.dealed == 'No' %}
+        <tr>
+          <td><a href="{%url 'details_page' ad.req_ads.id %}">{{ad.req_ads.id}}</a></td>
+          <td>{{ad.req_by.first_name}} {{ad.req_by.last_name}}</td>
+          <td><span class="badge badge-success">{{ad.req_by.customer.number}}</span></td>
+          <td>
+            <a href="{%url 'add_dealed' ad.id%}" class="btn btn-warning">
+              Deal
+            </a>
+          </td>
+        </tr>
+        {%else%}
+        
+        <tr>
+          <td><a href="{%url 'details_page' ad.req_ads.id %}">{{ad.req_ads.id}}</a></td>
+          <td>{{ad.req_by.first_name}} {{ad.req_by.last_name}}</td>
+          <td><span class="badge badge-success">{{ad.req_by.customer.number}}</span></td>
+          <td>
+            <a class="btn btn-warning">
+              Already Dealed
+            </a>
+          </td>
+        </tr>
+
+        {% endif %}
+          
+        
+        
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+{%endblock content%}

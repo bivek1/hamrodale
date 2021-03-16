@@ -1,0 +1,57 @@
+<section class="content"> 
+    <div class="container-fluid">    
+    <h2 class="text-center"> All Property Ads</h2>
+    <div class="form-group" >
+      {% if messages %}
+      
+        {% for message in messages %}
+        {% if message.tags == 'success' %}
+        <div class="alert alert-success" style="margin-top: 10px;">{{message}}</div>
+        {% endif %}
+        {% endfor %}
+        
+      {% endif %}
+    </div>   
+    <div class="card card-solid">
+        <div class="card-body pb-0">
+          <div class="row d-flex align-items-stretch">
+              {% for ads in advertise  %}
+              <div class="col-6 col-md-3 d-flex align-items-stretch">
+                <div class="card bg-light" style="width: 100%;">
+                  <div class="card-body p-0">
+                      <div class="row">
+                          <div class="col-12 text-center" style=" position: relative;">
+                              <img src="{{ads.images.url}}" alt="" class="img-fluid" style="height: 210px; width:100%;">
+                            <span class = "p-1" style="position: absolute; top: 0; left: 0; background-color: yellow;">
+                            {{ads.selling_in}}
+                            </span>
+                        </div>
+                      </div>
+                    <div class="row">
+                      <div class="col-12">
+                        <h4 class="text-md"><b>Rs. {{ads.price}}</b></h4>
+                        <h6 class="text-sm"><b>Location: </b> {{ads.location}} </h6>
+                        <p class="text-sm text-mute"> <b>Price in words: </b>{{ads.price_in_words}}</p>
+                        <p class="text-sm  text-mute"> <b>Land:</b>{{ads.house.landsize }}</p>
+                        
+                        {% if ads.house.bedroom >= 1 %}
+                        <div>
+                          <i class="fa fa-bath"> {{ads.house.bathroom}} </i>
+                          <i class="fa fa-bed"> {{ads.house.bedroom}} </i>
+                          <i class="fa fa-cheese"> {{ads.house.kitchen}} </i>
+                        </div>
+                        {% endif %}
+                            
+                      </div>
+                     
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+
+        </div>
+        
+      </div>
+    </div>
+</section>

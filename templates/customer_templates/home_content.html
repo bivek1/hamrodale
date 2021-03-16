@@ -1,0 +1,87 @@
+{% load static %}
+{% block main_content %}
+<section class="content"> 
+    <div class="text-center">
+      <h1>Customer Dashboard</h1>
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-8 col-12 m-auto">
+          <a href="{%url 'homepage'%}">
+            <div class="info-box">
+              <span class="info-box-icon bg-dark"><i class="fa fa-box"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-number">Go Back to main Page</span>
+                <span class="info-box-text text-muted">Go back to landing page of Hamro Dale Dai</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </a>
+        </div>
+      </div>
+      <hr>
+        <div class="row">
+                <div class="col-md-3 col-sm-6 col-12">
+                    <a href="{%url 'house_page'%}">
+                    <div class="info-box">
+                      <span class="info-box-icon bg-info"><i class="fa fa-home"></i></span>
+        
+                      <div class="info-box-content">
+                        <span class="info-box-number">View House Ads</span>
+                        <span class="info-box-text text-muted">view entire house ads</span>
+                      </div>
+                      <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </a>
+                  </div>
+            <!-- /.col -->     
+                <div class="col-md-3 col-sm-6 col-12">
+                    <a href="{%url 'land_page'%}">
+                    <div class="info-box">
+                      <span class="info-box-icon bg-success"><i class="fa fa-landmark"></i></span>
+                      <div class="info-box-content">
+                        <span class="info-box-number">View Land Ads</span>
+                        <span class="info-box-text text-muted">view entire land ads</span>
+                      </div>
+                      <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </a>
+                </div>
+                <div class="col-md-3 col-sm-6 col-12">
+                    <a href="{%url 'rent_page'%}">
+                    <div class="info-box">
+                      <span class="info-box-icon bg-warning"><i class="fa fa-house-damage"></i></span>
+        
+                      <div class="info-box-content">
+                        <span class="info-box-number">View Rent Ads</span>
+                        <span class="info-box-text text-muted">view entire rent ads</span>
+                      </div>
+                      <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </a>
+                  </div>
+                <div class="col-md-3 col-sm-6 col-12">
+                    <a href="{%url 'business_page'%}">
+                    <div class="info-box">
+                      <span class="info-box-icon bg-danger"><i class="fa fa-building"></i></span>
+        
+                      <div class="info-box-content">
+                        <span class="info-box-number">View Business Ads</span>
+                        <span class="info-box-text text-muted">view entire business ads</span>
+                      </div>
+                      <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                  </div>
+                  <!-- /.col -->
+                </a>
+                </div>    
+    </div>
+</section>
+
+{% endblock main_content %}

@@ -1,0 +1,109 @@
+{% load static %}
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="{%url 'homepage'%}" class="brand-link">
+      <!-- <img src="{%static  'dist/img/aa.png' %}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+           style="opacity: .8"> -->
+           <span class="brand-text" style="font-size: 20px;"><b style="background-color: black; color:white; padding:2px 3px 2px 3px; border-radius: 10px;" >DALE</b>  Dai</span>
+    </a>
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="{% if user.customer.profile_pic %}
+            {{user.customer.profile_pic.url}}
+            {%else%}
+            {%static 'dist/img/avatar04.png'%}
+          {% endif %}" class="img-circle elevation-2" alt="User Image" style="width: 50px; height: 40px;">
+        </div>
+        <div class="info">
+          <a href="{%url 'profile'%}" class="d-block">{{user.first_name}} {{user.last_name}}</a>
+        </div>
+      </div>
+
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+            <li class="nav-item">
+            {%url 'customer_page' as customer_page%}
+            <a href="{{customer_page}}" class="nav-link {%if request.path == customer_page %} active {%endif%}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+               HOME
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            {%url 'add_house' as add_house%}
+            <a href="{{add_house}}" class="nav-link {%if request.path == add_house %} active {%endif%}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Add House Ads
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            {%url 'add_land' as add_land%}
+            <a href="{{add_land}}" class="nav-link {%if request.path == add_land%} active {%endif%}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Add Land Ads
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            {%url 'add_rent' as add_rent%}
+            <a href="{{add_rent}}" class="nav-link {%if request.path == add_rent%} active {%endif%}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Add Rent Ads
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            {%url 'add_business' as add_business%}
+            <a href="{{add_business}}" class="nav-link {%if request.path == add_business%} active {%endif%}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Add Business Ads
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            {%url 'manage_ads' as manage_ads%}
+            {%url 'edit_ads' edit_id=id as edit_ads%}
+
+            <a href="{{manage_ads}}" class="nav-link {%if request.path == manage_ads%} active {%endif%} {%if request.path == edit_ads%} active {%endif%}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Manage My Ads
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            {%url 'password_change' as password_change%}
+            
+            <a href="{{password_change}}" class="nav-link {%if request.path == password_change%} active {%endif%} {%if request.path == edit_course%} active {%endif%}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Change password
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            {%url 'update_profile' as update_profile%}
+            
+            <a href="{{update_profile}}" class="nav-link {%if request.path == update_profile%} active {%endif%}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Update Profile
+              </p>
+            </a>
+          </li>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>

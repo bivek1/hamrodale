@@ -1,0 +1,201 @@
+{% extends "base_templates/index.html" %}
+{% load static %}
+{% block title %}
+  House For Sell
+{% endblock title %}
+
+{% block content %}
+<div class="container-fluid">
+
+    <div class="row">
+        {% if messages %}
+      
+        {% for message in messages %}
+        {% if message.tags == 'error' %}
+        <p class="text-center">{{message}}</p>
+        {% endif %}
+        {% if message.tags == 'success' %}
+        <p class="text-center">{{message}}</p>
+        {% endif %}
+        {% endfor %}
+        
+      {% endif %}
+      <div class="col-12">
+        <div class="card card-primary">
+            
+          <!-- /.card-header -->
+          <div class="card-body">
+            <div class="row">
+                
+            {% if loc %}    
+              {% for ads in loc  %}
+              <div class="col-sm-4 p-2" id="ads-{{ads.id}}">
+                <a href="{%url 'details_page' ads.id%}" style="color:black; cursor: pointer; text-decoration: none;">
+                <div class="position-relative p-0 bg-#d6d6d6 box-details" style="height: auto; border: 1px solid #d6d6d6; box-shadow: 1px 2px #d6d6d6;">
+                  <div class="ribbon-wrapper">
+                    <div class="ribbon bg-primary" style="font-size:9px;">
+                      {{ads.selling_in}}
+                    </div>
+                  </div>
+                  <div class="ads-details" style="width:100%; height: auto; display: inline-flex;">
+                    <div class="ads-text p-1" style="width:40%; height:auto;">
+                      <small >ID: {{ads.id}}</small> 
+                      {% if ads.house %}
+                      <span class="badge badge-primary">House</span>
+                      {% endif %}
+                      {% if ads.land %}
+                      <span class="badge badge-primary">Land</span>
+                      {% endif %}
+                      {% if ads.business %}
+                      <span class="badge badge-primary">Business</span>
+                      {% endif %}
+                      {% if ads.rent %}
+                      <span class="badge badge-primary">Rent</span>
+                      {% endif %}
+                      <span style="display: block; font-size: 20px; font-weight: bold;"> Rs. {{ads.price}}
+                        {% if ads.premium == 'Yes' %}
+                   
+                        <i class="fa fa-star" style="color:gold; font-size: 10px;"></i>
+                        <i class="fa fa-star" style="color:gold; font-size: 10px;"></i>
+                        <i class="fa fa-star" style="color:gold; font-size: 10px;"></i>
+
+                      {% endif %}
+                      {% if ads.feature == 'Yes' %}
+               
+                      <i class="fa fa-star" style="color:gold; font-size: 10px;"></i>
+                      <i class="fa fa-star" style="color:gold; font-size: 10px;"></i>
+                      {% endif %} </span>
+                      <span style="display: block; font-size: 10px;" class="text-capitalize">Price: {{ads.price_in_words}} </span>
+                      <span style="display: block; font-size: 17px;" class="text-capitalize">{{ads.location}} </span>
+                      {% if  ads.house %}    
+                      <span style="display: block; font-size: 13px;" class="text-capitalize">Land: {{ads.house.landsize}} </span>
+                      <span style="display: block; font-size: 13px;" class="text-capitalize">Road: {{ads.house.road_size}} </span>
+                      <small class="bg-red p-1">Face Toward: {{ads.house.face_toward}}</small>
+                      <i class="fa fa-bath" style="font-size: 13px;"> {{ads.house.bathroom}} </i>
+                      <i class="fa fa-bed" style="font-size: 13px;"> {{ads.house.bedroom}} </i>
+                      <i class="fa fa-cheese" style="font-size: 13px;"> {{ads.house.kitchen}} </i>
+                      {% endif %}
+                      
+                      
+                      {% if ads.land %}
+                      <span style="display: block; font-size: 13px;" class="text-capitalize">Land: {{ads.land.landsize}} </span>
+                      <span style="display: block; font-size: 13px;" class="text-capitalize">Road: {{ads.land.road_size}} </span>
+                      {% endif %}
+                        
+                      {% if ads.business %}
+                      <span class="bg-blue p-1">{{ads.business.businesstype}}</span>
+                      {% endif %}
+                    
+                      {% if ads.rent %}
+                        <span style="font-size: 15px;">
+                        Room: {{ads.rent.rentroom}} - </span>
+                        <i class="fa fa-bath" style="font-size: 13x;"> {{ads.rent.bathroom}} </i>
+                      {% endif %}
+                      <br>
+                    </div>
+                    <div class="ads-image" style="width: 60%; height: 280px; background-color: blue;">
+                         <img src=" {%if ads.images%}
+                         {{ads.images.url}}
+                         {%else%}
+                         {%static 'dist/img/aa.png'%}
+                         {%endif%}
+                         " alt="" srcset="" style="height: 100%; width: 100%;">
+                    </div>
+                  </div>
+                </div>
+                </a>
+              </div>
+              {% endfor %}
+            {% endif %}
+
+            {% if title %}    
+            {% for ads in title  %}
+            <div class="col-sm-4 p-2" id="ads-{{ads.id}}">
+              <a href="{%url 'details_page' ads.id%}" style="color:black; cursor: pointer; text-decoration: none;">
+              <div class="position-relative p-0 bg-#d6d6d6 box-details" style="height: auto; border: 1px solid #d6d6d6; box-shadow: 1px 2px #d6d6d6;">
+                <div class="ribbon-wrapper">
+                  <div class="ribbon bg-primary" style="font-size:9px;">
+                    {{ads.selling_in}}
+                  </div>
+                </div>
+                <div class="ads-details" style="width:100%; height: auto; display: inline-flex;">
+                  <div class="ads-text p-1" style="width:40%; height:auto;">
+                    <small >ID: {{ads.id}}</small> 
+                    {% if ads.house %}
+                    <span class="badge badge-primary">House</span>
+                    {% endif %}
+                    {% if ads.land %}
+                    <span class="badge badge-primary">Land</span>
+                    {% endif %}
+                    {% if ads.business %}
+                    <span class="badge badge-primary">Business</span>
+                    {% endif %}
+                    {% if ads.rent %}
+                    <span class="badge badge-primary">Rent</span>
+                    {% endif %}
+                    <span style="display: block; font-size: 20px; font-weight: bold;"> Rs. {{ads.price}}
+                      {% if ads.premium == 'Yes' %}
+                 
+                      <i class="fa fa-star" style="color:gold; font-size: 10px;"></i>
+                      <i class="fa fa-star" style="color:gold; font-size: 10px;"></i>
+                      <i class="fa fa-star" style="color:gold; font-size: 10px;"></i>
+
+                    {% endif %}
+                    {% if ads.feature == 'Yes' %}
+             
+                    <i class="fa fa-star" style="color:gold; font-size: 10px;"></i>
+                    <i class="fa fa-star" style="color:gold; font-size: 10px;"></i>
+                    {% endif %} </span>
+                    <span style="display: block; font-size: 10px;" class="text-capitalize">Price: {{ads.price_in_words}} </span>
+                    <span style="display: block; font-size: 17px;" class="text-capitalize">{{ads.location}} </span>
+                    {% if  ads.house %}    
+                    <span style="display: block; font-size: 13px;" class="text-capitalize">Land: {{ads.house.landsize}} </span>
+                    <span style="display: block; font-size: 13px;" class="text-capitalize">Road: {{ads.house.road_size}} </span>
+                    <small class="bg-red p-1">Face Toward: {{ads.house.face_toward}}</small>
+                    <i class="fa fa-bath" style="font-size: 13px;"> {{ads.house.bathroom}} </i>
+                    <i class="fa fa-bed" style="font-size: 13px;"> {{ads.house.bedroom}} </i>
+                    <i class="fa fa-cheese" style="font-size: 13px;"> {{ads.house.kitchen}} </i>
+                    {% endif %}
+                    
+                    
+                    {% if ads.land %}
+                    <span style="display: block; font-size: 13px;" class="text-capitalize">Land: {{ads.land.landsize}} </span>
+                    <span style="display: block; font-size: 13px;" class="text-capitalize">Road: {{ads.land.road_size}} </span>
+                    {% endif %}
+                      
+                    {% if ads.business %}
+                    <span class="bg-blue p-1">{{ads.business.businesstype}}</span>
+                    {% endif %}
+                  
+                    {% if ads.rent %}
+                      <span style="font-size: 15px;">
+                      Room: {{ads.rent.rentroom}} - </span>
+                      <i class="fa fa-bath" style="font-size: 13x;"> {{ads.rent.bathroom}} </i>
+                    {% endif %}
+                    <br>
+                  </div>
+                  <div class="ads-image" style="width: 60%; height: 280px; background-color: blue;">
+                       <img src=" {%if ads.images%}
+                       {{ads.images.url}}
+                       {%else%}
+                       {%static 'dist/img/aa.png'%}
+                       {%endif%}
+                       " alt="" srcset="" style="height: 100%; width: 100%;">
+                  </div>
+                </div>
+              </div>
+              </a>
+            </div>
+            {% endfor %}
+          {% endif %}
+            </div>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </div>
+{%endblock content%}

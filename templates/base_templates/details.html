@@ -1,0 +1,279 @@
+{% extends "base_templates/index.html" %}
+{% load static %}
+{% block title %}
+  Details
+{% endblock title %}
+
+
+{% block content %}
+<div class="container-fluid">
+  <div class="form-group" >
+    {% if messages %}
+    
+      {% for message in messages %}
+      {% if message.tags == 'success' %}
+      <div class="alert alert-success m-auto w-50" style="margin-top: 10px;">{{message}}</div>
+      {% endif %}
+      {% endfor %}
+      
+    {% endif %}
+  </div>
+  <div class="row">
+    
+    {% if house_ads %}
+    <div class=" p-0 col-12 col-md-9">
+      {%else%}
+      <div class=" p-0 col-12 col-md-12">
+    {% endif %}
+      
+    
+      <div class=" p-0 card card-solid">
+        <h5 class="pl-3 pt-2"> Details of Ads ID- {{ads.id}}</h5>
+        <div class="card-body">
+          <div class="row">
+            <div class="p-0 col-12 col-sm-6">
+              <div class="p-0 col-12">
+                <img src="{{ads.images.url}}" class="product-image" alt="Product Image"  style="height: 445px;">
+              </div>
+              <div class="col-12 product-image-thumbs">
+                {% for img in extra  %}
+                  <div class="product-image-thumb p-0" style="display: inline-table;" name= "moreimg"><img src="{{img.image.url}}" alt="Product Image"></div>
+                {% endfor %}
+                
+         
+              </div>
+            </div>
+            <div class="col-12 col-sm-6">
+              <h3 class="my-3 text-capitalize">{{ads.title}}
+                {% if ads.house %}
+                <span class="badge badge-primary">House</span>
+                {% endif %}
+                {% if ads.land %}
+                <span class="badge badge-primary">Land</span>
+                {% endif %}
+                {% if ads.business %}
+                <span class="badge badge-primary">Business</span>
+                {% endif %}
+                {% if ads.rent %}
+                <span class="badge badge-primary">Rent</span>
+                {% endif %}
+              </h3>
+              <p class="text-capitalize">{{ads.district}}-{{ads.woda}}-{{ads.location}}</p>
+              <hr>
+              <h4>Rs. {{ads.price}}</h4>
+              <small class="text-capitalize">Price in word: {{ads.price_in_words}}</small> <span class="badge badge-primary">{{ads.selling_in}}</span>
+              {% if  ads.house %}    
+              <span style="display: block; font-size: 18px;" class="text-capitalize">Land: {{ads.house.landsize}} </span>
+              <span style="display: block; font-size: 18px;" class="text-capitalize">Road: {{ads.house.road_size}}</span>
+              <span style="display: block; font-size: 18px;" class="text-capitalize">Floor: {{ads.house.floor}}   </span>
+              <H4 class="bg-gray p-1">Face Toward: {{ads.house.face_toward}}</H4>
+              <h6>  <b>Interial Details</b></h6>
+              <div>
+                <span class="pr-3">Garden: <b>{{ads.house.garden}}</b></span>
+                <span class="pr-3">Garage: <b>{{ads.house.garage}}</b> </span>
+                <span class="pr-3">Underground Tank: <b>{{ads.house.undergroudTank}}</b></span>
+              </div>
+
+              <hr> 
+              <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                <label class="btn btn-default text-center">
+                  <input type="radio" name="color_option" id="color_option1" autocomplete="off">
+                  <span class="text-md"><i class="fa fa-bed" style="font-size: 13px;">  </i></span>
+                  <br>
+                  {{ads.house.bedroom}} <small>bedroom</small>
+                </label>
+                <label class="btn btn-default text-center">
+                  <input type="radio" name="color_option" id="color_option1" autocomplete="off">
+                  <span class="text-md"><i class="fa fa-bath" style="font-size: 13px;">  </i></span>
+                  <br>
+                  {{ads.house.bathroom}} <small>bathroom</small>
+                </label>
+                <label class="btn btn-default text-center">
+                  <input type="radio" name="color_option" id="color_option1" autocomplete="off">
+                  <span class="text-md"><i class="fa fa-cheese" style="font-size: 13px;"></i></span>
+                  <br>
+                  {{ads.house.kitchen}} <small>kitchen</small>
+                </label>
+                
+              </div>
+              {% endif %}
+
+              {% if ads.land %}
+              <span style="display: block; font-size: 18px;" class="text-capitalize">Land: {{ads.land.landsize}} </span>
+              <span style="display: block; font-size: 18px;" class="text-capitalize">Road: {{ads.land.road_size}}</span>
+              <span style="display: block; font-size: 18px;" class="text-capitalize">Plotting: {{ads.land.plotting}}   </span>
+              <span style="display: block; font-size: 18px;" class="text-capitalize">Elecrticity Line: {{ads.land.electrivityline}}   </span>
+
+              {% endif %}
+                
+              {% if ads.business %}
+              <br>
+              <h4 class="bg-blue p-1">Business Type: {{ads.business.businesstype}}</h4>
+              {% endif %}
+            
+              {% if ads.rent %}
+              <span style="display: block; font-size: 18px;" class="text-capitalize">Total Room: {{ads.rent.rentroom}}   </span>
+              <h6>  <b>Details</b></h6>
+              <div>
+                <span class="pr-3">Garage: <b>{{ads.rent.garage}}</b> </span>
+                <span class="pr-3">Internet: <b>{{ads.rent.internet}}</b></span>
+                <span class="pr-3">TV channel: <b>{{ads.rent.tvchannel}}</b></span>
+              </div>
+
+              <hr> 
+              <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                <label class="btn btn-default text-center">
+                  <input type="radio" name="color_option" id="color_option1" autocomplete="off">
+                  <span class="text-md"><i class="fa fa-bed" style="font-size: 13px;">  </i></span>
+                  <br>
+                  {{ads.rent.rentroom}} <small>Total room</small>
+                </label>
+                <label class="btn btn-default text-center">
+                  <input type="radio" name="color_option" id="color_option1" autocomplete="off">
+                  <span class="text-md"><i class="fa fa-bath" style="font-size: 13px;">  </i></span>
+                  <br>
+                  {{ads.rent.bathroom}} <small>bathroom</small>
+                </label>
+              </div>
+              {% endif %}
+              
+
+                
+              <div class="mt-4">
+                
+                {% if own_ads %}
+                <div class="btn btn-success btn-lg btn-flat">
+                  <i class="fas fa-door-closed fa-lg mr-2"></i> 
+                  This is your ads <br>
+                  <small>You can't request it for Buy</small>
+                </div>
+                {%else%}
+                {% if req %}
+                <div class="btn btn-success btn-lg btn-flat">
+                  <i class="fas fa-door-open fa-lg mr-2"></i> 
+                  Already Requested
+                </div>
+                {%else%}
+                {%if user.is_authenticated%}
+                <a href="{%url 'request' ads.id%}">
+                {%else%}
+                <a href="{%url 'login'%}">
+                {%endif%}
+                
+                  <div class="btn btn-primary btn-lg btn-flat">
+                    <i class="fas fa-cart-plus fa-lg mr-2"></i> 
+                    Request Interested 
+                  </div>
+                </a>
+                {% endif %}
+                {% endif %}
+                  
+
+
+       
+                <div class="btn btn-default btn-lg btn-flat">
+                  <i class="fas fa-mail-bulk fa-lg mr-2"></i> 
+                  Email Owner
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-4">
+            <nav class="w-100">
+              <div class="nav nav-tabs" id="product-tab" role="tablist">
+                <a class="nav-item nav-link active" id="product-desc-tab" data-toggle="tab" href="#product-desc" role="tab" aria-controls="product-desc" aria-selected="true">Description</a>
+                <a class="nav-item nav-link" id="product-comments-tab" data-toggle="tab" href="#product-comments" role="tab" aria-controls="product-comments" aria-selected="false">Comments</a>
+              </div>
+            </nav>
+            <div class="tab-content p-3 w-100" id="nav-tabContent">
+              <div class="tab-pane fade active show" id="product-desc" role="tabpanel" aria-labelledby="product-desc-tab"> {{ads.description}}</div>
+              <div class="tab-pane fade" id="product-comments" role="tabpanel" aria-labelledby="product-comments-tab">
+                <div class="card-footer card-comments">
+                  {% for com in comment %}
+                  <div class="card-comment">
+              
+                    <div class="m-0 comment-text">
+                      <span class="username">
+                        {{com.comment_by.first_name}}
+                        <span class="text-muted float-right">{{com.created_date}}</span>
+                      </span><!-- /.username -->
+                      {{com.body}}
+                      
+                      {% if com.comment_by == user or request.user.is_superuser %}
+                      <br>
+                      <a href="{%url 'delete_cmt' com.id%}" style="font-size:12px"> 
+                        Delete this Comment
+                        <!-- <button class="btn btn-danger btn-sm"> delete </button> -->
+                      </a>
+                        
+                      {% endif %}
+                        
+                    </div>
+                    <!-- /.comment-text -->
+                  </div>
+                  {% endfor %}
+                
+  
+                </div>
+                <div class="card-footer">
+                  <form action="#" method="post">
+                      {% csrf_token %}
+                      
+                        
+                      <input type="text" class="form-control form-control-md" placeholder="Press enter to post comment" name = 'comment' required>
+                      <button type= "submit" class="mt-3 btn btn-secondary" style="display: inline;">
+                        comment
+                      </button>
+  
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /.card-body -->
+    </div>
+    </div>
+    
+    {% if house_ads %}      
+    <div class="col-12 col-md-3">
+      <h5 class="text-center">Similar property</h5>
+      {% for ads in house_ads  %}
+                <div class="position-relative p-0 m-2 bg-#d6d6d6 box-details" style="height: auto; border: 1px solid #d6d6d6; box-shadow: 1px 2px #d6d6d6;">
+                  <div class="ribbon-wrapper">
+                    <div class="ribbon bg-primary" style="font-size:9px;">
+                      {{ads.objectname.selling_in}}
+                    </div>
+                  </div>
+                  <div class="ads-details" style="width:100%; height: auto; display: inline-flex;">
+                    <div class="ads-text p-1" style="width:40%; height:auto;">
+                      <small >ID: {{ads.objectname.id}}</small> 
+                      <span style="display: block; font-size: 16px; font-weight: bold;"> Rs. {{ads.objectname.price}} </span>
+                      <span style="display: block; font-size: 10px;" class="text-capitalize">Price: {{ads.objectname.price_in_words}} </span>
+                      <span style="display: block; font-size: 15px;" class="text-capitalize">{{ads.objectname.location}} </span>                  
+                      <br>
+                    </div>
+                    <div class="ads-image" style="width: 60%; height: 150px; background-color: blue;">
+                         <img src=" {%if ads.objectname.images%}
+                         {{ads.objectname.images.url}}
+                         {%else%}
+                         {%static 'dist/img/aa.png'%}
+                         {%endif%}
+                         " alt="" srcset="" style="height: 100%; width: 100%;">
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+    </div>
+          
+    {% endif %}
+  </div>
+</div>
+
+<script>
+  document.getElementById("moreimg").onclick = function (ev){
+
+  }
+</script>
+
+{% endblock content %}

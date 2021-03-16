@@ -1,0 +1,143 @@
+{% load static %}
+{% block main_content %}
+<section class="content"> 
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-3 col-6">
+      <!-- small box -->
+      <div class="small-box bg-info">
+        <div class="inner">
+          <h3>{{req}}</h3>
+
+          <p>New Buy Request</p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-bag"></i>
+        </div>
+        <a href="{%url 'requestads'%}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+      </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+      <!-- small box -->
+      <div class="small-box bg-success">
+        <div class="inner">
+          <h3>{{ads}}</h3>
+
+          <p>Total Ads Posted</p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-stats-bars"></i>
+        </div>
+        <a href="{%url 'total_ads'%}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+      </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+      <!-- small box -->
+      <div class="small-box bg-warning">
+        <div class="inner">
+          <h3>{{member}}</h3>
+
+          <p>Total User Registrations</p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-person-add"></i>
+        </div>
+        <a href="{%url 'total_member'%}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+      </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+      <!-- small box -->
+      <div class="small-box bg-danger">
+        <div class="inner">
+          <h3>{{visit}}</h3>
+
+          <p>Total Visitors</p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-pie-graph"></i>
+        </div>
+        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+      </div>
+    </div>
+    <!-- ./col -->
+  </div>
+</div>
+    <div class="container-fluid">
+      <h3 class="text-lg">
+        Added Property
+      </h3>
+        <div class="row">
+                <div class="col-md-3 col-sm-6 col-12">
+                    <a href="{%url 'house_page'%}">
+                    <div class="info-box">
+                      <span class="info-box-icon bg-info"><i class="fa fa-home"></i></span>
+        
+                      <div class="info-box-content">
+                        <span class="info-box-text">View House Ads</span>
+                        <span class="info-box-number">Total Ads. {{house}}</span>
+                      </div>
+                      <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </a>
+                  </div>
+        
+   
+            <!-- /.col -->
+            
+                <div class="col-md-3 col-sm-6 col-12">
+                    <a href="{%url 'land_page'%}">
+                    <div class="info-box">
+                      <span class="info-box-icon bg-success"><i class="fa fa-landmark"></i></span>
+                      <div class="info-box-content">
+                        <span class="info-box-text">View Land Ads</span>
+                        <span class="info-box-number">Total Ads. {{land}}</span>
+                      </div>
+                      <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </a>
+                  </div>
+        
+  
+            
+                <div class="col-md-3 col-sm-6 col-12">
+                    <a href="{%url 'rent_page'%}">
+                    <div class="info-box">
+                      <span class="info-box-icon bg-warning"><i class="fa fa-house-damage"></i></span>
+        
+                      <div class="info-box-content">
+                        <span class="info-box-text">View Rent Ads</span>
+                        <span class="info-box-number">Total Ads. {{rent}}</span>
+                      </div>
+                      <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </a>
+                  </div>
+        
+    
+            
+                <div class="col-md-3 col-sm-6 col-12">
+                    <a href="{%url 'business_page'%}">
+                    <div class="info-box">
+                      <span class="info-box-icon bg-danger"><i class="fa fa-building"></i></span>
+        
+                      <div class="info-box-content">
+                        <span class="info-box-text">View Business Ads</span>
+                        <span class="info-box-number">Total Ads. {{business}}</span>
+                      </div>
+                      <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                  </div>
+                  <!-- /.col -->
+                </a>
+                </div>    
+    </div>
+</section>
+
+{% endblock main_content %}

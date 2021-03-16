@@ -1,0 +1,67 @@
+{% extends "base_templates/index.html" %}
+{% load static %}
+{% block title %}
+  House For Sale
+{% endblock title %}
+
+{% block content %}
+<section class="content"> 
+    <div class="container-fluid">
+        <!-- showing House -->
+        <div class="card-body">
+            <h4 class = "text-center"><b>House for Sale </b></h4> 
+            <div class="row">      
+              {% for ads in ads  %}
+              <div class="col-sm-4 p-2" id="ads-{{ads.id}}">
+                <a href="{%url 'details_page' ads.objectname.id%}" style="color:black; cursor: pointer; text-decoration: none;">
+                <div class="position-relative p-0 bg-#d6d6d6 box-details" style="height: 250px; border: 1px solid #d6d6d6; box-shadow: 1px 2px #d6d6d6;">
+                  <div class="ribbon-wrapper">
+                    <div class="ribbon bg-primary" style="font-size:9px;">
+                      {{ads.objectname.selling_in}}
+                    </div>
+                  </div>
+                  <div class="ads-details" style="width:100%; height: 100%; display: inline-flex;">
+                    <div class="ads-text p-1" style="width:40%; height:100%;">
+                      <small >ID: {{ads.objectname.id}}</small> 
+                      <span class="badge badge-primary">House<small style="font-size: 12px;"> <br>By: {{ads.objectname.created_by.first_name}}</small></span>
+                      <span style="display: block; font-size: 20px; font-weight: bold;">  Rs. {{ads.objectname.price}} 
+                        {% if ads.objectname.premium == 'Yes' %}
+                   
+                        <i class="fa fa-star" style="color:gold; font-size: 10px;"></i>
+                        <i class="fa fa-star" style="color:gold; font-size: 10px;"></i>
+                        <i class="fa fa-star" style="color:gold; font-size: 10px;"></i>
+
+                      {% endif %}
+                      {% if ads.objectname.feature == 'Yes' %}
+               
+                      <i class="fa fa-star" style="color:gold; font-size: 10px;"></i>
+                      <i class="fa fa-star" style="color:gold; font-size: 10px;"></i>
+                      {% endif %}</span>
+                      <span style="display: block; font-size: 10px;" class="text-capitalize"> Price: {{ads.objectname.price_in_words}} </span>
+                      <span style="display: block; font-size: 17px; font-weight: bold;" class="text-capitalize">{{ads.objectname.location}} </span>
+                      <span style="display: block; font-size: 13px;" class="text-capitalize">Land: {{ads.landsize}} </span>
+                      <span style="display: block; font-size: 13px;" class="text-capitalize">Road: {{ads.road_size}} </span>
+                      <small class="bg-red p-1">Face Toward: {{ads.face_toward}}</small> <br>
+                      <i class="fa fa-bath" style="font-size: 13px;"> {{ads.bathroom}} </i>
+                      <i class="fa fa-bed" style="font-size: 13px;"> {{ads.bedroom}} </i>
+                      <i class="fa fa-cheese" style="font-size: 13px;"> {{ads.kitchen}} </i>
+                    </div>
+                    <div class="ads-image" style="width: 60%; height: 100%; background-color: blue;">
+                         <img src=" {%if ads.objectname.images%}
+                         {{ads.objectname.images.url}}
+                         {%else%}
+                         {%static 'dist/img/aa.png'%}
+                         {%endif%}
+                         " alt="" srcset="" style="height: 100%; width: 100%;">
+                    </div>
+                  </div>
+                </div>
+                </a>
+              </div>
+              {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

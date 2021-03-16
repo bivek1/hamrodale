@@ -1,0 +1,41 @@
+{% extends "customer_templates/base_template.html" %}
+{% load static %}
+{% block title %}
+  Your profile
+{% endblock title %}
+
+{% block content %}
+  <div class="card card-primary card-outline">
+              <div class="card-body box-profile">
+                <div class="text-center">
+                  <img class="profile-user-img img-fluid img-circle" src="{% if user.customer.profile_pic %}
+                  {{user.customer.profile_pic.url}}
+                  {%else%}
+                  {%static 'dist/img/avatar04.png'%}
+                {% endif %}" alt="User profile picture">
+                </div>
+
+                <h3 class="profile-username text-center">{{user.first_name}} {{user.last_name}}</h3>
+
+                <p class="text-muted text-center"></p>
+
+                <ul class="list-group list-group-unbordered mb-3">
+                  <li class="list-group-item">
+                    <b>Address</b> <a class="float-right">{{data.address}}</a>
+                  </li>
+                  <li class="list-group-item">
+                    <b>Email</b> <a class="float-right">{{user.email}}</a>
+                  </li>
+                  <li class="list-group-item">
+                    <b>Phone Number</b> <a class="float-right">{{data.number}}</a>
+                  </li>
+                </ul>
+                <a href="{%url 'update_profile'%}">
+                    <button class="btn btn-info">
+                        Edit
+                    </button>
+                </a>
+              </div>
+              <!-- /.card-body -->
+            </div>
+{% endblock content %}

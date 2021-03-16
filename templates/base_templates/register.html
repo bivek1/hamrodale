@@ -1,0 +1,44 @@
+{% extends "base_templates/base.html" %}
+{% block title %}
+  User Login
+{% endblock title %}
+
+
+{% block content %}
+
+<div class="login-box" style="margin:auto;">
+    <div class="login-logo">
+      <b>DALE DAI </b>USER
+    </div>
+    {% if messages %}
+       
+    <div class="col-12" >
+      {% for message in messages %}
+      {% if message.tags == 'error' %}
+      <div class="alert alert-danger" style="margin-top: 10px;">{{message}}</div>
+      {% endif %}
+      {% endfor %}
+    </div>     
+    {% endif %}
+    <!-- /.login-logo -->
+    <div class="card">
+      <div class="card-body login-card-body">
+        <p class="login-box-msg">Sign Up to nepal Best Online property Selling Website</p>
+  
+        <form action="register" method="post">
+            {% csrf_token %}
+            {{form}}
+            <br>
+          <div class="row">
+            <!-- /.col -->
+            <div class="col-12">
+              <button type="submit" class="btn btn-primary btn-block">Register</button>
+            </div>
+            <!-- /.col -->
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}

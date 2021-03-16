@@ -1,0 +1,21 @@
+{% extends "admin_templates/base_template.html" %}
+{% load static %}
+{% block title %}
+  Notification
+{% endblock title %}
+{% block content %}
+<div class="card-body">
+  {% for com in all  %}
+  <div class="callout callout-danger">
+    <a href="{%url 'details_page' com.comment_ads.id%}" class="dropdown-item">
+      <p>
+        <i class="fas fa-envelope mr-2"></i> New comment on ads {{com.comment_ads.id}} by {{com.comment_by.first_name}}- {{com.body}}
+      </p>
+      
+      <span class="float-right text-muted text-sm">{{com.created_date}}</span>
+    </a>
+  </div>
+  {% endfor %}
+
+</div>
+{% endblock content %}

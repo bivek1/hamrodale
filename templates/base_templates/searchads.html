@@ -1,0 +1,120 @@
+{% extends "base_templates/index.html" %}
+{% load static %}
+{% block title %}
+  House For Sell
+{% endblock title %}
+
+{% block content %}
+<div class="container-fluid">
+
+    <div class="row">
+        {% if messages %}
+      
+        {% for message in messages %}
+        {% if message.tags == 'error' %}
+        <p class="text-center">{{message}}</p>
+        {% endif %}
+        {% if message.tags == 'success' %}
+        <p class="text-center">{{message}}</p>
+        {% endif %}
+        {% endfor %}
+        
+      {% endif %}
+      <div class="col-12">
+        <div class="card card-primary">
+          {% if ads %}  
+          <h5 class="p-1 text-center">Search Results..</h5>
+          <!-- /.card-header -->
+          <div class="card-body">
+            <div class="row">
+                
+              {% for ads in ads  %}
+              <div class="col-sm-4 p-2" id="ads-{{ads.objectname.id}}">
+                <a href="{%url 'details_page' ads.objectname.id %}" style="color:black; cursor: pointer; text-decoration: none;">
+                <div class="position-relative p-0 bg-#d6d6d6 box-details" style="height: auto; border: 1px solid #d6d6d6; box-shadow: 1px 2px #d6d6d6;">
+                  <div class="ribbon-wrapper">
+                    <div class="ribbon bg-primary" style="font-size:9px;">
+                      {{ads.objectname.selling_in}}
+                    </div>
+                  </div>
+                  <div class="ads-details" style="width:100%; height: auto; display: inline-flex;">
+                    <div class="ads-text p-1" style="width:40%; height:auto;">
+                      <small >ID: {{ads.objectname.id}}</small> 
+                      
+                      <span style="display: block; font-size: 20px; font-weight: bold;"> Rs. {{ads.objectname.price}}
+                        {% if ads.objectname.premium == 'Yes' %}
+                   
+                        <i class="fa fa-star" style="color:gold; font-size: 10px;"></i>
+                        <i class="fa fa-star" style="color:gold; font-size: 10px;"></i>
+                        <i class="fa fa-star" style="color:gold; font-size: 10px;"></i>
+
+                      {% endif %}
+                      {% if ads.objectname.feature == 'Yes' %}
+               
+                      <i class="fa fa-star" style="color:gold; font-size: 10px;"></i>
+                      <i class="fa fa-star" style="color:gold; font-size: 10px;"></i>
+                      {% endif %} </span>
+                      <span style="display: block; font-size: 10px;" class="text-capitalize">Price: {{ads.objectname.price_in_words}} </span>
+                      <span style="display: block; font-size: 17px;" class="text-capitalize">{{ads.objectname.location}} </span>
+                      {% if  opt == 'house' %}   
+                     
+                      <span style="display: block; font-size: 13px;" class="text-capitalize">Land: {{ads.landsize}} </span>
+                      <span style="display: block; font-size: 13px;" class="text-capitalize">Road: {{ads.road_size}} </span>
+                      <small class="bg-red p-1">Face Toward: {{ads.face_toward}}</small> <br>
+                      <i class="fa fa-bath" style="font-size: 13px;"> {{ads.bathroom}} </i>
+                      <i class="fa fa-bed" style="font-size: 13px;"> {{ads.bedroom}} </i>
+                      <i class="fa fa-cheese" style="font-size: 13px;"> {{ads.kitchen}} </i>
+                      {% endif %}
+                      
+                      
+                      {% if opt == 'land' %}
+                      <span style="display: block; font-size: 13px;" class="text-capitalize">Land: {{ads.landsize}} </span>
+                      <span style="display: block; font-size: 13px;" class="text-capitalize">Road: {{ads.road_size}} </span>
+                      {% endif %}
+                        
+                      {% if opt == 'business' %}
+                      <span class="bg-blue p-1">{{ads.businesstype}}</span>
+                      {% endif %}
+                    
+                      {% if opt == 'rent' %}
+                        <span style="font-size: 15px;">
+                        Room: {{ads.rentroom}} - </span>
+                        <i class="fa fa-bath" style="font-size: 13x;"> {{ads.bathroom}} </i>
+                      {% endif %}
+                      <br>
+                    </div>
+                    <div class="ads-image" style="width: 60%; height: 280px; background-color: blue;">
+                         <img src=" {%if ads.objectname.images%}
+                         {{ads.objectname.images.url}}
+                         {%else%}
+                         {%static 'dist/img/aa.png'%}
+                         {%endif%}
+                         " alt="" srcset="" style="height: 100%; width: 100%;">
+                    </div>
+                  </div>
+                </div>
+                </a>
+              </div>
+              {% endfor %}
+
+              {%else%}
+              <div class="text-center">
+                <h4 class="text-center">
+                  Sorry No result Found
+                </h4>
+              </div>
+
+        
+
+            </div>
+          </div>
+          {% endif %}
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </div>
+{%endblock content%}

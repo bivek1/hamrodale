@@ -1,0 +1,213 @@
+{% extends "customer_templates/base_template.html" %}
+{% block title %}
+  Update Ads
+{% endblock title %}
+
+{% block content %}
+<h4 class="pl-3">Edit Ads ID: {{id}}</h4>
+<div class="form-group" >
+  {% if messages %}
+    {% for message in messages %}
+    {% if message.tags == 'error' %}
+    <div class="alert alert-danger" style="margin-top: 10px;">{{message}}</div>
+    {% endif %}
+    {% if message.tags == 'success' %}
+    <div class="alert alert-success" style="margin-top: 10px;">{{message}}</div>
+    {% endif %}
+    {% endfor %}
+  {% endif %}
+</div>   
+<form role="form" action="/edit_ads_save" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="card-body">
+      <div class="form-row">
+        <div class="col-12 col-md-6">
+          {{form.title.label_tag}}
+          {{form.title}} 
+          {{form.title.errors}}
+        </div>
+        <div class="col-6 col-md-3">
+          {{form.district.label_tag}}
+          {{form.district}} 
+          {{form.district.errors}}
+        </div>
+        <div class="col-6 col-md-3">
+          {{form.woda.label_tag}}
+          {{form.woda}} 
+          {{form.woda.errors}}
+        </div>
+        <div class="col-6 col-md-3">
+          {{form.location.label_tag}}
+          {{form.location}} 
+          {{form.location.errors}}
+        </div>
+        <div class="col-6 col-md-3">
+          {{form.price.label_tag}}
+          {{form.price}} 
+          {{form.price.errors}}
+        </div>
+        <div class="col-12 col-md-6">
+          {{form.price_in_words.label_tag}}
+          {{form.price_in_words}} 
+          {{form.price_in_words.errors}}
+        </div>
+        <div class="col-6 col-md-3">
+          {{form.selling_in.label_tag}}
+          {{form.selling_in}} 
+          {{form.selling_in.errors}}
+        </div>
+        {% if form.rentroom %}
+        <div class="col-6 col-md-3">
+          {{form.rentroom.label_tag}}
+          {{form.rentroom}} 
+          {{form.rentroom.errors}}
+        </div>
+        {% endif %}
+        {% if form.internet %}
+        <div class="col-6 col-md-3">
+          {{form.internet.label_tag}}
+          {{form.internet}} 
+          {{form.internet.errors}}
+        </div>
+        {% endif %}
+        {% if form.tvchannel %}
+        <div class="col-6 col-md-3">
+          {{form.tvchannel.label_tag}}
+          {{form.tvchannel}} 
+          {{form.tvchannel.errors}}
+        </div>
+        {% endif %}
+        {% if form.business %}
+        <div class="col-6 col-md-9">
+          {{form.business.label_tag}}
+          {{form.business}} 
+          {{form.business.errors}}
+        </div>
+        {% endif %}
+        {% if form.landsize %}
+        <div class="col-6 col-md-3">
+          {{form.landsize.label_tag}}
+          {{form.landsize}} 
+          {{form.landsize.errors}}
+        </div>
+        {% endif %}
+        {% if form.roadsize %}
+        <div class="col-4 col-md-2">
+          {{form.roadsize.label_tag}}
+          {{form.roadsize}} 
+          {{form.roadsize.errors}}
+        </div>
+        {% endif %}
+        {% if form.floor %}
+        <div class="col-4 col-md-2">
+          {{form.floor.label_tag}}
+          {{form.floor}} 
+          {{form.floor.errors}}
+        </div>
+        {% endif %}
+        {% if form.bedroom %}
+        <div class="col-4 col-md-2">
+          {{form.bedroom.label_tag}}
+          {{form.bedroom}} 
+          {{form.bedroom.errors}}
+        </div>
+        {% endif %}
+        {% if form.bathroom %}
+        <div class="col-4 col-md-2">
+          {{form.bathroom.label_tag}}
+          {{form.bathroom}} 
+          {{form.bathroom.errors}}
+        </div>
+        {% endif %}
+        {% if form.kitchen %}
+        <div class="col-4 col-md-2">
+          {{form.kitchen.label_tag}}
+          {{form.kitchen}} 
+          {{form.kitchen.errors}}
+        </div>
+        {% endif %}
+        {% if form.face_towards %}
+        <div class="col-4 col-md-2">
+          {{form.face_towards.label_tag}}
+          {{form.face_towards}} 
+          {{form.face_towards.errors}}
+        </div>
+        {% endif %}
+        {% if form.garden %}
+        <div class="col-4 col-md-2">
+          {{form.garden.label_tag}}
+          {{form.garden}} 
+          {{form.garden.errors}}
+        </div>
+        {% endif %}
+        {% if form.garage %}
+        <div class="col-6 col-md-3">
+          {{form.garage.label_tag}}
+          {{form.garage}} 
+          {{form.garage.errors}}
+        </div>
+        {% endif %}
+        {% if form.undergroundtank %}
+        <div class="col-6 col-md-3">
+          {{form.undergroundtank.label_tag}}
+          {{form.undergroundtank}} 
+          {{form.undergroundtank.errors}}
+        </div>
+        {% endif %}
+        {% if form.electricity %}
+        <div class="col-4 col-md-2">
+          {{form.electricity.label_tag}}
+          {{form.electricity}} 
+          {{form.electricity.errors}}
+        </div>
+        {% endif %}
+        {% if form.plotting %}
+        <div class="col-4 col-md-2">
+          {{form.plotting.label_tag}}
+          {{form.plotting}} 
+          {{form.plotting.errors}}
+        </div>
+        {% endif %}
+        <div class="col-12 col-md-12">
+          {{form.description.label_tag}}
+          {{form.description}} 
+          {{form.description.errors}}
+        </div> 
+
+        {% if form.house_pic %}
+        <div class="col-12 col-md-12">
+          {{form.house_pic.label_tag}}
+          {{form.house_pic}} 
+          {{form.house_pic.errors}}
+        </div>
+        {% endif %}
+        {% if form.land_pic %}
+        <div class="col-12 col-md-12">
+          {{form.land_pic.label_tag}}
+          {{form.land_pic}} 
+          {{form.land_pic.errors}}
+        </div>
+        {% endif %}
+        {% if form.rent_pic %}
+        <div class="col-12 col-md-12">
+          {{form.rent_pic.label_tag}}
+          {{form.rent_pic}} 
+          {{form.rent_pic.errors}}
+        </div>
+        {% endif %}
+        {% if form.business_pic %}
+        <div class="col-12 col-md-12">
+          {{form.business_pic.label_tag}}
+          {{form.business_pic}} 
+          {{form.business_pic.errors}}
+        </div>
+        {% endif %}
+      </div>
+    </div>
+    <!-- /.card-body -->
+
+    <div class="card-footer">
+      <button type="submit" class="btn btn-primary btn-block">Update Ads</button>
+    </div>
+  </form> 
+{% endblock content %}

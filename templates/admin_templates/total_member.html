@@ -1,0 +1,71 @@
+{% extends "admin_templates/base_template.html" %}
+{% load static %}
+{% block title %}
+ Total User
+{% endblock title %}
+
+{% block content %}
+<div class="container-fluid">
+  <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4"><div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row"><div class="col-sm-12"><table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+
+    <thead>
+      <tr role="row">
+          <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" >ID</th>
+          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">Name</th>
+          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">Email</th>
+          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">Address</th>
+          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" >Number</th>
+          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">Profil Pic</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for m in mem %}
+   
+      <tr role="row" class="odd">
+        <td class="sorting_1">{{m.id}}</td>
+        <td>{{m.admin.first_name}} {{m.admin.last_name}}</td>
+        <td>{{m.admin.email}}</td>
+        <td>{{m.address}}</td>
+        <td>{{m.number}}</td>
+        <td>
+          
+          {% if m.profile_pic %}
+          <a href= "#" data-toggle="modal" data-target="#exampleModal{{m.admin.id}}" >
+            <img class="rounded-circle" src="{{m.profile_pic.url}}" alt="" srcset="" style="height: 70px; width: 70px;">
+          </a>
+          
+          {%else%}
+          Not Uploaded Yet
+          {% endif %}
+            
+        </td>
+      </tr>
+      <div class="modal fade" id="exampleModal{{m.admin.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">{{m.admin.first_name}}{{m.admin.last_name}} Profile</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              {% if m.profile_pic %}
+              <img src="{{m.profile_pic.url}}" alt="" srcset="" style="height: 400px; width: 100%;">
+              {% endif %}
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      </tbody>
+      
+   </table>
+   </div>
+</div>
+
+    
+{% endblock content %}

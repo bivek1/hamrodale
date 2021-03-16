@@ -1,0 +1,28 @@
+
+{% extends "admin_templates/base_template.html" %} 
+
+{% block title %}
+  Add Business for Ads
+{% endblock title %}
+
+{% for message in messages  %}
+  <div>
+    <p>{{message}}</p>
+  </div>
+{% endfor %}
+{% block content %}
+<section class="content"> 
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- general form elements -->
+                <div class="card card-primary">
+                  <div class="card-header">
+                    <h3 class="card-title">Add Business</h3>
+                  </div>
+                  {%url 'add_business_save_admin' as action_path %}
+                  {% include "admin_templates/form_templates.html" with messages=messages form=form action_path=action_path button_text="Add Business" %}
+        </div>
+        {% endblock content %}
+    </div>
+</section>
